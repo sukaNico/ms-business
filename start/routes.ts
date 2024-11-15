@@ -25,3 +25,6 @@ Route.get('/', async () => {
 })
 
 
+import './routes/categorias';
+import './routes/productos';
+import './routes/categoriaProductos';
