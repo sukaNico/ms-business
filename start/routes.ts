@@ -28,3 +28,6 @@ Route.get('/', async () => {
 import './routes/categorias';
 import './routes/productos';
 import './routes/categoriaProductos';
+import './routes/departamentos';
+import './routes/municipios';
+import './routes/usuarios';

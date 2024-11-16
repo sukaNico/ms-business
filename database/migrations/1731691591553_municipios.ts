@@ -1,17 +1,14 @@
 
 import BaseSchema from '@ioc:Adonis/Lucid/Schema';
 
-export default class Categorias extends BaseSchema {
-  protected tableName = 'categorias';
+export default class Municipios extends BaseSchema {
+  protected tableName = 'municipios';
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id');
       table.string('nombre')
-      table.string('descripcion')
-    
-      //Clave foranea 
-      table.integer('categoria_padre_id').unsigned().references('categorias.id').onDelete('CASCADE')
+      table.integer('departamento_id').unsigned().references('id').inTable('departamentos')
       
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
