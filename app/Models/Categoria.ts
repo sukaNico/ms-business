@@ -23,17 +23,17 @@ export default class Categoria extends BaseModel {
   public updatedAt: DateTime;
 
   @belongsTo(() => Categoria, {
-    foreignKey: 'categoria_padre_id', // El campo que referencia a la categoría padre
+    foreignKey: 'categoria_padre_id',
   })
   public categoriaPadre: BelongsTo<typeof Categoria>;
 
   @hasOne(() => Categoria, {
-    foreignKey: 'categoria_padre_id', // Asegúrate de que este sea el nombre correcto
+    foreignKey: 'categoria_padre_id',
   })
   public categoria: HasOne<typeof Categoria>;
 
   @hasMany(() => CategoriaProducto,{ 
     foreignKey: 'categoria_id' 
   })
-  public screenings: HasMany<typeof CategoriaProducto>
+  public categoriaProductos: HasMany<typeof CategoriaProducto>
 }

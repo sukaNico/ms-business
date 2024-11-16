@@ -1,0 +1,31 @@
+import { hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import Producto from './Producto';
+
+import { DateTime } from 'luxon';
+import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm';
+
+export default class Lote extends BaseModel {
+  @column({ isPrimary: true })
+  public id: number;
+
+  @column()
+  public tipoDeCarga: string;
+
+  @column()
+  public peso: number;
+
+  @column()
+  public ruta_id: number;
+
+  @column.dateTime({ autoCreate: true })
+  public createdAt: DateTime;
+
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  public updatedAt: DateTime;
+
+  @hasMany(() => Producto, {
+    foreignKey: "lote_id"
+  })
+  public producto: HasMany<typeof Producto>;
+
+}
