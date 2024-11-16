@@ -37,3 +37,5 @@ export default class Categoria extends BaseModel {
   })
   public screenings: HasMany<typeof CategoriaProducto>
 }
+
+// Prueba de colaboración
