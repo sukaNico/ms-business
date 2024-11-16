@@ -1,3 +1,5 @@
+import { belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
+import Departamento from './Departamento';
 
 import { DateTime } from 'luxon';
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm';
@@ -17,4 +19,10 @@ export default class Municipio extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime;
+
+  @belongsTo(() => Departamento, {
+    foreignKey: "departamento_id"
+  })
+  public departamento: BelongsTo<typeof Departamento>;
+
 }
