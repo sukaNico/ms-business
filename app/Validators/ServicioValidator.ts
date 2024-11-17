@@ -2,15 +2,14 @@
 import { schema, rules } from '@ioc:Adonis/Core/Validator';
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class GastoValidator {
+export default class ServicioValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    costo: schema.number(),
-      servicio_id: schema.number(),
-      conductor_id: schema.number(),
-      duenios_id: schema.number(),
-      factura_id: schema.number()
+    nombre: schema.string({ trim: true }),
+      direccion: schema.string({ trim: true }),
+      descripcion: schema.string({ trim: true }),
+      fecha: schema.string()
   });
 
   public messages = {};

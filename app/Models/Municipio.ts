@@ -1,3 +1,4 @@
+import Operacion from './Operacion';
 import { hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import Direccion from './Direccion';
 import { belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
@@ -27,10 +28,14 @@ export default class Municipio extends BaseModel {
   })
   public direccion: HasMany<typeof Direccion>;
 
-
   @belongsTo(() => Departamento, {
     foreignKey: "departamento_id"
   })
   public departamento: BelongsTo<typeof Departamento>;
+
+  @hasMany(() => Operacion, {
+    foreignKey: "municipio_id"
+  })
+  public operacion: HasMany<typeof Operacion>;
 
 }

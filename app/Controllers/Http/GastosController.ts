@@ -29,12 +29,11 @@ export default class GastosController {
     const record = await Gasto.findOrFail(params.id);
     const body = request.body();
     
+    record.costo = body.costo;
     record.servicio_id = body.servicio_id;
     record.conductor_id = body.conductor_id;
-    record.monto = body.monto;
-    record.descripcion = body.descripcion;
-    record.estado = body.estado;
-    record.dueño_id = body.dueño_id;
+    record.duenios_id = body.duenios_id;
+    record.factura_id = body.factura_id;
 
     return await record.save();
   }

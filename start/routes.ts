@@ -48,4 +48,10 @@ import './routes/rutas';
 import './routes/direcciones';
 import './routes/centro_distribuciones';
 import './routes/direccion_rutas';
-
+import './routes/operaciones';
+import './routes/gastos';
+import './routes/servicios';
+import './routes/restaurantes';
+import './routes/hoteles';
+import './routes/administradores';
+import './routes/facturas';

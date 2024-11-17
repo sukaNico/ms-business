@@ -1,3 +1,4 @@
+import Factura from './Factura';
 import { belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
 import Contrato from './Contrato';
 
@@ -18,10 +19,14 @@ export default class Cuota extends BaseModel {
   public tasa_interes: number;
 
   @column()
-  public fecha_generacion: date;
+  public fecha_generacion: Date;
 
   @column()
-  public fecha_vencimiento: date;
+  public fecha_vencimiento: Date;
+
+  @column()
+  public factura_id: number;
+
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
@@ -33,5 +38,11 @@ export default class Cuota extends BaseModel {
     foreignKey: "contrato_id"
   })
   public contrato: BelongsTo<typeof Contrato>;
+
+
+  @belongsTo(() => Factura, {
+    foreignKey: "factura_id"
+  })
+  public factura: BelongsTo<typeof Factura>;
 
 }

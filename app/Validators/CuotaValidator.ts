@@ -7,6 +7,7 @@ export default class CuotaValidator {
 
   public schema = schema.create({
     contrato_id: schema.number(),
+    factura_id:schema.number(),
       monto: schema.number(),
       tasa_interes: schema.number(),
       fecha_generacion: schema.date(),

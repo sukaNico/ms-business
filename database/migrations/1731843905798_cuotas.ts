@@ -8,6 +8,7 @@ export default class Cuotas extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id');
       table.integer('contrato_id').unsigned().references('id').inTable('contratos')
+      table.integer('factura_id').unsigned().references('id').inTable('facturas')
       table.integer('monto')
       table.integer('tasa_interes')
       table.date('fecha_generacion')

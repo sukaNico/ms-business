@@ -1,3 +1,4 @@
+import Gasto from './Gasto';
 import { hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import Duenio from './Duenio';
 import VehiculoConductor from './VehiculoConductor';
@@ -53,5 +54,11 @@ export default class Conductor extends BaseModel {
     foreignKey: "conductor_id"
   })
   public duenio: HasOne<typeof Duenio>;
+
+
+  @hasMany(() => Gasto, {
+    foreignKey: "conductor_id"
+  })
+  public gasto: HasMany<typeof Gasto>;
 
 }

@@ -1,3 +1,4 @@
+import Operacion from './Operacion';
 import Ruta from './Ruta';
 import Seguro from './Seguro';
 import DuenioVehiculo from './DuenioVehiculo';
@@ -57,5 +58,11 @@ export default class Vehiculo extends BaseModel {
     foreignKey: "vehiculo_id"
   })
   public ruta: HasMany<typeof Ruta>;
+
+
+  @hasMany(() => Operacion, {
+    foreignKey: "vehiculo_id"
+  })
+  public operacion: HasMany<typeof Operacion>;
 
 }

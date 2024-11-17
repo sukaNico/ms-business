@@ -1,46 +1,44 @@
 
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
-import Cuota from 'App/Models/Cuota';
-import CuotaValidator from 'App/Validators/CuotaValidator';
+import Operacion from 'App/Models/Operacion';
+import OperacionValidator from 'App/Validators/OperacionValidator';
 
-export default class CuotasController {
+export default class OperacionesController {
   public async find({ request, params }: HttpContextContract) {
     if (params.id) {
-      return await Cuota.findOrFail(params.id);
+      return await Operacion.findOrFail(params.id);
     } else {
       const data = request.all();
       if ('page' in data && 'per_page' in data) {
         const page = request.input('page', 1);
         const perPage = request.input('per_page', 20);
-        return await Cuota.query().paginate(page, perPage);
+        return await Operacion.query().paginate(page, perPage);
       } else {
-        return await Cuota.query();
+        return await Operacion.query();
       }
     }
   }
 
   public async create({ request }: HttpContextContract) {
-    await request.validate(CuotaValidator);
+    await request.validate(OperacionValidator);
     const body = request.body();
-    return await Cuota.create(body);
+    return await Operacion.create(body);
   }
 
   public async update({ params, request }: HttpContextContract) {
-    const record = await Cuota.findOrFail(params.id);
+    const record = await Operacion.findOrFail(params.id);
     const body = request.body();
     
-    record.contrato_id = body.contrato_id;
-    record.factura_id = body.factura_id;
-    record.monto = body.monto;
-    record.tasa_interes = body.tasa_interes;
-    record.fecha_generacion = body.fecha_generacion;
-    record.fecha_vencimiento = body.fecha_vencimiento;
+    record.fechaInicio = body.fechaInicio;
+    record.fechaFinalizacion = body.fechaFinalizacion;
+    record.municipio_id = body.municipio_id;
+    record.vehiculo_id = body.vehiculo_id;
 
     return await record.save();
   }
 
   public async delete({ params, response }: HttpContextContract) {
-    const record = await Cuota.findOrFail(params.id);
+    const record = await Operacion.findOrFail(params.id);
     await record.delete();
     response.status(204);
   }
