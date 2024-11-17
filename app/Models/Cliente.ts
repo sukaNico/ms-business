@@ -1,3 +1,4 @@
+import Contrato from './Contrato';
 import PersonaNatural from './PersonaNatural';
 import { hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import Empresa from './Empresa';
@@ -39,5 +40,11 @@ export default class Cliente extends BaseModel {
     foreignKey: "persona_natural_id"
   })
   public personanatural: HasOne<typeof PersonaNatural>;
+
+
+  @hasMany(() => Contrato, {
+    foreignKey: "cliente_id"
+  })
+  public contrato: HasMany<typeof Contrato>;
 
 }

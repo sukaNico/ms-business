@@ -35,3 +35,13 @@ import './routes/clientes';
 import './routes/personasNaturales';
 import './routes/empresas';
 import './routes/lotes';
+import './routes/conductores'
+import './routes/turnos';
+import './routes/vehiculos';
+import './routes/vehiculo_conductores';
+import './routes/duenios';
+import './routes/duenio_vehiculos';
+import './routes/seguros';
+import './routes/contratos';
+import './routes/cuotas';
+import './routes/rutas';
