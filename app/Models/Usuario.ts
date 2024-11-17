@@ -1,3 +1,5 @@
+import { hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
+import PersonaNatural from './PersonaNatural';
 
 import { DateTime } from 'luxon';
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm';
@@ -23,4 +25,10 @@ export default class Usuario extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime;
+
+  @hasOne(() => PersonaNatural, {
+    foreignKey: "usuario_id"
+  })
+  public personanatural: HasOne<typeof PersonaNatural>;
+
 }

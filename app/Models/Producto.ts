@@ -1,3 +1,6 @@
+import Lote from './Lote';
+import { belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
+import Cliente from './Cliente';
 
 import { DateTime } from 'luxon';
 import { BaseModel, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm';
@@ -32,4 +35,16 @@ export default class Producto extends BaseModel {
     foreignKey: 'producto_id' 
   })
   public screenings: HasMany<typeof CategoriaProducto>
+
+  @belongsTo(() => Cliente, {
+    foreignKey: "cliente_id"
+  })
+  public cliente: BelongsTo<typeof Cliente>;
+
+
+  @belongsTo(() => Lote, {
+    foreignKey: "lote_id"
+  })
+  public lote: BelongsTo<typeof Lote>;
+
 }

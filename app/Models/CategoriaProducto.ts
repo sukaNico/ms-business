@@ -21,12 +21,12 @@ export default class CategoriaProducto extends BaseModel {
   public updatedAt: DateTime;
 
   @belongsTo(() => Categoria,{ 
-    foreignKey: 'categoria_id' // Este es el nombre de la clave foranea en la de projectors
+    foreignKey: 'categoria_id' 
   })
   public categoria : BelongsTo<typeof Categoria>
 
   @belongsTo(() => Producto,{ 
-    foreignKey: 'producto_id' // Este es el nombre de la clave foranea en la de projectors
+    foreignKey: 'producto_id'
   })
   public producto : BelongsTo<typeof Producto>
 }

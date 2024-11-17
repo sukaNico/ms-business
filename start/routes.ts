@@ -31,4 +31,8 @@ import './routes/categoriaProductos';
 import './routes/departamentos';
 import './routes/municipios';
 import './routes/usuarios';
+import './routes/clientes';
+import './routes/personasNaturales';
+import './routes/empresas';
+import './routes/lotes';
 import './routes/gastos';
