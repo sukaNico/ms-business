@@ -1,3 +1,5 @@
+import { hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import Direccion from './Direccion';
 import { belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
 import Departamento from './Departamento';
 
@@ -19,6 +21,12 @@ export default class Municipio extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime;
+
+  @hasMany(() => Direccion, {
+    foreignKey: "municipio_id"
+  })
+  public direccion: HasMany<typeof Direccion>;
+
 
   @belongsTo(() => Departamento, {
     foreignKey: "departamento_id"

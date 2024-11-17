@@ -1,3 +1,7 @@
+import { belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
+import Ruta from './Ruta';
+import { hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
+import DireccionRuta from './DireccionRuta';
 import { hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import Producto from './Producto';
 
@@ -27,5 +31,17 @@ export default class Lote extends BaseModel {
     foreignKey: "lote_id"
   })
   public producto: HasMany<typeof Producto>;
+
+
+  @hasOne(() => DireccionRuta, {
+    foreignKey: "lote_id"
+  })
+  public direccionruta: HasOne<typeof DireccionRuta>;
+
+
+  @belongsTo(() => Ruta, {
+    foreignKey: "ruta_id"
+  })
+  public ruta: BelongsTo<typeof Ruta>;
 
 }

@@ -1,14 +1,18 @@
 
 import BaseSchema from '@ioc:Adonis/Lucid/Schema';
 
-export default class Clientes extends BaseSchema {
-  protected tableName = 'clientes';
+export default class Direcciones extends BaseSchema {
+  protected tableName = 'direcciones';
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id');
-      table.date('fechaRegistro')
-      table.string('preferencias')
+      table.string('barrio')
+      table.string('tipoCalle')
+      table.string('calle')
+      table.integer('numero')
+      table.string('piso')
+      table.integer('municipio_id').unsigned().references('id').inTable('municipios')
       
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
