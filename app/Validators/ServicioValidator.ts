@@ -7,10 +7,12 @@ export default class ServicioValidator {
 
   public schema = schema.create({
     nombre: schema.string({ trim: true }),
-      direccion: schema.string({ trim: true }),
-      descripcion: schema.string({ trim: true }),
-      fecha: schema.string()
+    direccion: schema.string({ trim: true }),
+    descripcion: schema.string({ trim: true }),
+    fecha: schema.string([
+      rules.regex(/^\d{4}-\d{2}-\d{2}$/),
+    ])
   });
-
+  
   public messages = {};
 }

@@ -7,10 +7,10 @@ export default class FacturaValidator {
 
   public schema = schema.create({
     fecha: schema.date(),
-      total: schema.number(),
-      estado: schema.string({ trim: true }),
-      cuota_id: schema.number(),
-      gasto_id: schema.number()
+    total: schema.number(),
+    estado: schema.string({ trim: true }, [rules.maxLength(50), rules.minLength(3)]),
+    cuota_id: schema.number([rules.exists({ table: 'cuotas', column: 'id' })]),
+    gasto_id: schema.number([rules.exists({ table: 'gastos', column: 'id' })])
   });
 
   public messages = {};

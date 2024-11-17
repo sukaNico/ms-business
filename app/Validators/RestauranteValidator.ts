@@ -7,7 +7,9 @@ export default class RestauranteValidator {
 
   public schema = schema.create({
     tipoCocina: schema.string({ trim: true }),
-      servicio_id: schema.number()
+    servicio_id: schema.number([
+      rules.exists({ table: 'servicios', column: 'id' }),
+    ])
   });
 
   public messages = {};
