@@ -1,9 +1,12 @@
+import { hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import Lote from './Lote';
 import Vehiculo from './Vehiculo';
 import { belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
 import Contrato from './Contrato';
 
 import { DateTime } from 'luxon';
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm';
+import DireccionRuta from './DireccionRuta';
 
 export default class Ruta extends BaseModel {
   @column({ isPrimary: true })
@@ -25,10 +28,10 @@ export default class Ruta extends BaseModel {
   public distancia: number;
 
   @column()
-  public fecha_inicio: date;
+  public fecha_inicio: Date;
 
   @column()
-  public fecha_fin: date;
+  public fecha_fin: Date;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
@@ -46,5 +49,16 @@ export default class Ruta extends BaseModel {
     foreignKey: "vehiculo_id"
   })
   public vehiculo: BelongsTo<typeof Vehiculo>;
+
+
+  @hasMany(() => Lote, {
+    foreignKey: "ruta_id"
+  })
+  public lote: HasMany<typeof Lote>;
+
+  @hasMany(() => DireccionRuta,{ 
+    foreignKey: 'ruta_id' 
+  })
+  public direccionRuta: HasMany<typeof DireccionRuta>
 
 }

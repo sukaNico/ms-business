@@ -45,3 +45,7 @@ import './routes/seguros';
 import './routes/contratos';
 import './routes/cuotas';
 import './routes/rutas';
+import './routes/direcciones';
+import './routes/centro_distribuciones';
+import './routes/direccion_rutas';
+

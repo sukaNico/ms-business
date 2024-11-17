@@ -34,7 +34,7 @@ export default class Producto extends BaseModel {
   @hasMany(() => CategoriaProducto,{ 
     foreignKey: 'producto_id' 
   })
-  public screenings: HasMany<typeof CategoriaProducto>
+  public categoriaProducto: HasMany<typeof CategoriaProducto>
 
   @belongsTo(() => Cliente, {
     foreignKey: "cliente_id"
