@@ -1,7 +1,6 @@
 import Duenio from './Duenio';
 import { hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import PersonaNatural from './PersonaNatural';
-
 import { DateTime } from 'luxon';
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm';
 
