@@ -5,6 +5,9 @@ import { DateTime } from 'luxon';
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm';
 
 export default class Seguro extends BaseModel {
+
+  public static table = "seguros"
+
   @column({ isPrimary: true })
   public id: number;
 
@@ -18,10 +21,10 @@ export default class Seguro extends BaseModel {
   public aseguradora: string;
 
   @column()
-  public fecha_inicio: date;
+  public fecha_inicio: Date;
 
   @column()
-  public fecha_fin: date;
+  public fecha_fin: Date;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;

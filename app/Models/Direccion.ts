@@ -8,6 +8,9 @@ import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm';
 import DireccionRuta from './DireccionRuta';
 
 export default class Direccion extends BaseModel {
+
+  public static table = "direcciones"
+
   @column({ isPrimary: true })
   public id: number;
 

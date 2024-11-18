@@ -7,6 +7,9 @@ import { BaseModel, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm';
 import CategoriaProducto from './CategoriaProducto';
 
 export default class Producto extends BaseModel {
+
+  public static table = "productos"
+
   @column({ isPrimary: true })
   public id: number;
 

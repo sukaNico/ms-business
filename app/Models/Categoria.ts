@@ -4,6 +4,9 @@ import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany, hasOne, HasO
 import CategoriaProducto from './CategoriaProducto';
 
 export default class Categoria extends BaseModel {
+
+public static table = "categorias"
+
   @column({ isPrimary: true })
   public id: number;
 

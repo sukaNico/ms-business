@@ -8,6 +8,9 @@ import { DateTime } from 'luxon';
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm';
 
 export default class PersonaNatural extends BaseModel {
+
+  public static table = "personaNaturales"
+
   @column({ isPrimary: true })
   public id: number;
 

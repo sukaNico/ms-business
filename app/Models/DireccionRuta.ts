@@ -7,6 +7,9 @@ import Direccion from './Direccion';
 import Ruta from './Ruta';
 
 export default class DireccionRuta extends BaseModel {
+
+  public static table = "direccionRutas"
+
   @column({ isPrimary: true })
   public id: number;
 

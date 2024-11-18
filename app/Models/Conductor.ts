@@ -11,6 +11,9 @@ import { DateTime } from 'luxon';
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm';
 
 export default class Conductor extends BaseModel {
+
+  public static table = "conductores"
+
   @column({ isPrimary: true })
   public id: number;
 
