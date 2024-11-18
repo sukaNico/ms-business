@@ -1,3 +1,4 @@
+import Conductor from './Conductor';
 import Duenio from './Duenio';
 import { hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import PersonaNatural from './PersonaNatural';
@@ -36,5 +37,11 @@ export default class Usuario extends BaseModel {
     foreignKey: "usuario_id"
   })
   public duenio: HasOne<typeof Duenio>;
+
+
+  @hasOne(() => Conductor, {
+    foreignKey: "usuario_id"
+  })
+  public conductor: HasOne<typeof Conductor>;
 
 }
