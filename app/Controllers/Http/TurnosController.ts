@@ -2,6 +2,8 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Turno from 'App/Models/Turno';
 import TurnoValidator from 'App/Validators/TurnoValidator';
+import Notificaciones from 'App/Models/notification'
+import Database from '@ioc:Adonis/Lucid/Database';
 
 export default class TurnosController {
   public async find({ request, params }: HttpContextContract) {
@@ -20,9 +22,39 @@ export default class TurnosController {
   }
 
   public async create({ request }: HttpContextContract) {
+    // Validar los datos
     await request.validate(TurnoValidator);
     const body = request.body();
-    return await Turno.create(body);
+  
+    // Crear el turno
+    const turno = await Turno.create(body);
+  
+    // Obtener el conductor relacionado
+    const conductor = await Database
+      .from('conductores') 
+      .where('id', body.conductor_id)
+      .firstOrFail();
+  
+    // Obtener el correo del usuario relacionado con el conductor
+    const usuario = await Database
+      .from('usuarios') 
+      .where('id', conductor.usuario_id)
+      .firstOrFail();
+  
+    const correoConductor = usuario.email;
+    console.log(correoConductor);
+    
+  
+    // Enviar el correo al conductor
+    const asunto = 'Nuevo turno asignado';
+    const contenido = `Se le ha asignado un nuevo turno con los siguientes detalles:
+    - Hora inicio: ${turno.hora_inico}
+    - Hora fin: ${turno.hora_fin}
+    - Ubicación: ${turno.ubicacion}`;
+  
+    await Notificaciones.enviarNotificacion(asunto, correoConductor, contenido);
+  
+    return turno;
   }
 
   public async update({ params, request }: HttpContextContract) {
