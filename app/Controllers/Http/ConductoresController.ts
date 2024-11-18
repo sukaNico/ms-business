@@ -31,7 +31,7 @@ export default class ConductoresController {
     
     record.usuario_id = body.usuario_id;
     record.licencia_conduccion = body.licencia_conduccion;
-    record.años_experiencia = body.años_experiencia;
+    record.anios_experiencia = body.años_experiencia;
 
     return await record.save();
   }
