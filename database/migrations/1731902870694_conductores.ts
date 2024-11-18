@@ -1,4 +1,3 @@
-
 import BaseSchema from '@ioc:Adonis/Lucid/Schema';
 
 export default class Conductores extends BaseSchema {
@@ -9,7 +8,7 @@ export default class Conductores extends BaseSchema {
       table.increments('id');
       table.integer('usuario_id').unsigned().references('id').inTable('usuarios').onDelete('CASCADE')
       table.string('licencia_conduccion')
-      table.integer('años_experiencia')
+      table.integer('anios_experiencia')
       
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

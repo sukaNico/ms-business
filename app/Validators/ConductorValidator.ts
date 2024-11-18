@@ -8,7 +8,7 @@ export default class ConductorValidator {
   public schema = schema.create({
     usuario_id: schema.number(),
       licencia_conduccion: schema.string({ trim: true }),
-      años_experiencia: schema.number()
+      anios_experiencia: schema.number()
   });
 
   public messages = {};

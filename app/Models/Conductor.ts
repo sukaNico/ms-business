@@ -27,7 +27,7 @@ export default class Conductor extends BaseModel {
   public licencia_conduccion: string;
 
   @column()
-  public años_experiencia: number;
+  public anios_experiencia: number;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
