@@ -10,8 +10,6 @@ export default class Facturas extends BaseSchema {
       table.date('fecha')
       table.integer('total')
       table.string('estado')
-      table.integer('cuota_id').unsigned().references('id').inTable('cuotas')
-      table.integer('gasto_id').unsigned().references('id').inTable('gastos')
       
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

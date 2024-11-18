@@ -1,3 +1,4 @@
+import { hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import { belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
 import Servicio from './Servicio';
 
@@ -23,9 +24,10 @@ export default class Administrador extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime;
 
-  @belongsTo(() => Servicio, {
-    foreignKey: "servicio_id"
+  
+  @hasOne(() => Servicio, {
+    foreignKey: "administrador_id"
   })
-  public servicio: BelongsTo<typeof Servicio>;
+  public servicio: HasOne<typeof Servicio>;
 
 }

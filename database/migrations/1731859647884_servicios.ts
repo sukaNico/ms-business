@@ -11,7 +11,8 @@ export default class Servicios extends BaseSchema {
       table.string('direccion')
       table.string('descripcion')
       table.string('fecha')
-      
+      table.integer('administrador_id').unsigned().references('id').inTable('administradores')
+
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     });

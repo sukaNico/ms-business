@@ -1,3 +1,4 @@
+import { belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
 import Administrador from './Administrador';
 import Hotel from './Hotel';
 import { hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
@@ -47,10 +48,9 @@ export default class Servicio extends BaseModel {
   })
   public hotel: HasOne<typeof Hotel>;
 
-
-  @hasOne(() => Administrador, {
-    foreignKey: "servicio_id"
+  @belongsTo(() => Administrador, {
+    foreignKey: "administrador_id"
   })
-  public administrador: HasOne<typeof Administrador>;
+  public administrador: BelongsTo<typeof Administrador>;
 
 }
