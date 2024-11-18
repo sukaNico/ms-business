@@ -8,8 +8,8 @@ export default class extends BaseSchema {
       table.increments('id')
       table.string('nacionalidad')
       table.string('genero')
-      table.integer('cliente_id').unsigned().references('id').inTable('clientes')
-      table.integer('usuario_id').unsigned().references('id').inTable('usuarios')
+      table.integer('cliente_id').unsigned().references('id').inTable('clientes').onDelete('CASCADE')
+      table.integer('usuario_id').unsigned().references('id').inTable('usuarios').onDelete('CASCADE')
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */

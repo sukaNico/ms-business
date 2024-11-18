@@ -4,8 +4,8 @@ export default class extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('categoria_id').unsigned().references('id').inTable('categorias')
-      table.integer('producto_id').unsigned().references('id').inTable('productos')
+      table.integer('categoria_id').unsigned().references('id').inTable('categorias').onDelete('CASCADE')
+      table.integer('producto_id').unsigned().references('id').inTable('productos').onDelete('CASCADE')
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */

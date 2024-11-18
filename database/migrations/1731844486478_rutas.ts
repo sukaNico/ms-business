@@ -7,8 +7,8 @@ export default class Rutas extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id');
-      table.integer('contrato_id').unsigned().references('id').inTable('contratos')
-      table.integer('vehiculo_id').unsigned().references('id').inTable('vehiculos')
+      table.integer('contrato_id').unsigned().references('id').inTable('contratos').onDelete('CASCADE')
+      table.integer('vehiculo_id').unsigned().references('id').inTable('vehiculos').onDelete('CASCADE')
       table.string('lugar_inicio')
       table.string('lugar_fin')
       table.integer('distancia')

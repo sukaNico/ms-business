@@ -12,7 +12,7 @@ export default class Direcciones extends BaseSchema {
       table.string('calle')
       table.integer('numero')
       table.string('piso')
-      table.integer('municipio_id').unsigned().references('id').inTable('municipios')
+      table.integer('municipio_id').unsigned().references('id').inTable('municipios').onDelete("CASCADE")
       
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

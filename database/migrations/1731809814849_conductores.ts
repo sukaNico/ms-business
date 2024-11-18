@@ -7,7 +7,7 @@ export default class Conductores extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id');
-      table.integer('usuario_id').unsigned().references('id').inTable('usuarios')
+      table.integer('usuario_id').unsigned().references('id').inTable('usuarios').onDelete('CASCADE')
       table.string('licencia_conduccion')
       table.integer('años_experiencia')
       

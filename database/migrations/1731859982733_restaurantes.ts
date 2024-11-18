@@ -8,7 +8,7 @@ export default class Restaurantes extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id');
       table.string('tipoCocina')
-      table.integer('servicio_id').unsigned().references('id').inTable('servicios')
+      table.integer('servicio_id').unsigned().references('id').inTable('servicios').onDelete('CASCADE')
       
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

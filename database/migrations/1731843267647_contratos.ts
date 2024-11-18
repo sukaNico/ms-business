@@ -7,7 +7,7 @@ export default class Contratos extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id');
-      table.integer('cliente_id').unsigned().references('id').inTable('clientes')
+      table.integer('cliente_id').unsigned().references('id').inTable('clientes').onDelete('CASCADE')
       table.integer('valor')
       table.date('fecha_inico')
       table.date('fecha_fin')

@@ -9,8 +9,8 @@ export default class Operaciones extends BaseSchema {
       table.increments('id');
       table.string('fechaInicio')
       table.string('fechaFinalizacion')
-      table.integer('municipio_id').unsigned().references('id').inTable('municipios')
-      table.integer('vehiculo_id').unsigned().references('id').inTable('vehiculos')
+      table.integer('municipio_id').unsigned().references('id').inTable('municipios').onDelete('CASCADE')
+      table.integer('vehiculo_id').unsigned().references('id').inTable('vehiculos').onDelete('CASCADE')
       
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

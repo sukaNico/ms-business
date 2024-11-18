@@ -7,8 +7,8 @@ export default class Duenio_vehiculos extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id');
-      table.integer('vehiculo_id').unsigned().references('id').inTable('vehiculos')
-      table.integer('duenio_id').unsigned().references('id').inTable('duenios')
+      table.integer('vehiculo_id').unsigned().references('id').inTable('vehiculos').onDelete('CASCADE')
+      table.integer('duenio_id').unsigned().references('id').inTable('duenios').onDelete('CASCADE')
       table.date('fecha_compra')
       
       table.timestamp('created_at', { useTz: true })

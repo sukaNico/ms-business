@@ -7,7 +7,7 @@ export default class Seguros extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id');
-      table.integer('vehiculo_id').unsigned().references('id').inTable('vehiculos')
+      table.integer('vehiculo_id').unsigned().references('id').inTable('vehiculos').onDelete('CASCADE')
       table.string('tipo')
       table.string('aseguradora')
       table.date('fecha_inicio')

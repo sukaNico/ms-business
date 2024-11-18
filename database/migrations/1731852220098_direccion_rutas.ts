@@ -7,8 +7,8 @@ export default class Direccion_rutas extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id');
-      table.integer('direccion_id').unsigned().references('id').inTable('direcciones')
-      table.integer('ruta_id').unsigned().references('id').inTable('rutas')
+      table.integer('direccion_id').unsigned().references('id').inTable('direcciones').onDelete('CASCADE')
+      table.integer('ruta_id').unsigned().references('id').inTable('rutas').onDelete('CASCADE')
       table.integer('lote_id').unsigned().references('id').inTable('lotes')
       table.dateTime('fechaEntrega')
       table.integer('distancia')

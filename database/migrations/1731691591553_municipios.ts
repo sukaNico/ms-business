@@ -8,7 +8,7 @@ export default class Municipios extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id');
       table.string('nombre')
-      table.integer('departamento_id').unsigned().references('id').inTable('departamentos')
+      table.integer('departamento_id').unsigned().references('id').inTable('departamentos').onDelete("CASCADE")
       
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

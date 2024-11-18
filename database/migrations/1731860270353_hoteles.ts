@@ -9,7 +9,7 @@ export default class Hoteles extends BaseSchema {
       table.increments('id');
       table.string('númeroHabitacion')
       table.string('serviciosIncluidos')
-      table.integer('servicio_id').unsigned().references('id').inTable('servicios')
+      table.integer('servicio_id').unsigned().references('id').inTable('servicios').onDelete('CASCADE')
       
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

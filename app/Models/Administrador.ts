@@ -24,7 +24,6 @@ export default class Administrador extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime;
 
-  
   @hasOne(() => Servicio, {
     foreignKey: "administrador_id"
   })

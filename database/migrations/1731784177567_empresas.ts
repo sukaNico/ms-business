@@ -10,7 +10,7 @@ export default class Empresas extends BaseSchema {
       table.string('nombre')
       table.integer('nit')
       table.integer('persona_natural_id').unsigned().references('id').inTable('personas_naturales')
-      table.integer('cliente_id').unsigned().references('id').inTable('clientes')
+      table.integer('cliente_id').unsigned().references('id').inTable('clientes').onDelete('CASCADE')
       
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

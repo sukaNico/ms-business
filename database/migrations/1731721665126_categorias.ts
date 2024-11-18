@@ -8,7 +8,7 @@ export default class Categorias extends BaseSchema {
       table.string('descripcion')
     
       //Clave foranea 
-      table.integer('categoria_padre_id').unsigned().references('categorias.id').onDelete('CASCADE')
+      table.integer('categoria_padre_id').unsigned().references('categorias.id').nullable().onDelete('CASCADE')
       
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

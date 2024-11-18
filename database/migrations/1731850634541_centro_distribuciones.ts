@@ -12,7 +12,7 @@ export default class Centro_distribuciones extends BaseSchema {
       table.integer('telefono')
       table.string('hora_apertura')
       table.string('hora_cierre')
-      table.integer('direccion_id').unsigned().references('id').inTable('direcciones')
+      table.integer('direccion_id').unsigned().references('id').inTable('direcciones').onDelete('CASCADE')
       
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
