@@ -54,3 +54,4 @@ import './routes/restaurantes';
 import './routes/hoteles';
 import './routes/administradores';
 import './routes/facturas';
+import "./routes/pagos"
