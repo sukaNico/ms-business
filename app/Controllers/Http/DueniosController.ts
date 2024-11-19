@@ -2,11 +2,28 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Duenio from 'App/Models/Duenio';
 import DuenioValidator from 'App/Validators/DuenioValidator';
+import axios from 'axios';
+import Env from '@ioc:Adonis/Core/Env';
 
 export default class DueniosController {
   public async find({ request, params }: HttpContextContract) {
     if (params.id) {
-      return await Duenio.findOrFail(params.id);
+      const duenio = await Duenio.findOrFail(params.id);
+      try {
+        const usuarioResponse = await axios.get(
+          `${Env.get('MS_SECURITY')}/api/users/${duenio.usuario_id}`
+        );
+  
+        duenio.$extras.usuario = usuarioResponse.data;
+
+        return {
+          duenio,
+          usuario: usuarioResponse.data,
+        };
+      } catch (error) {
+        console.error('Error al obtener el usuario:', error.message);
+        throw new Error('No se pudo obtener la información del usuario');
+      }
     } else {
       const data = request.all();
       if ('page' in data && 'per_page' in data) {

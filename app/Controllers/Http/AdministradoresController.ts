@@ -2,11 +2,28 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Administrador from 'App/Models/Administrador';
 import AdministradorValidator from 'App/Validators/AdministradorValidator';
+import axios from 'axios';
+import Env from '@ioc:Adonis/Core/Env';
 
 export default class AdministradoresController {
   public async find({ request, params }: HttpContextContract) {
     if (params.id) {
-      return await Administrador.findOrFail(params.id);
+      const administrador = await Administrador.findOrFail(params.id);
+      try {
+        const usuarioResponse = await axios.get(
+          `${Env.get('MS_SECURITY')}/api/users/${administrador.usuario_id}`
+        );
+  
+        administrador.$extras.usuario = usuarioResponse.data;
+
+        return {
+          administrador,
+          usuario: usuarioResponse.data,
+        };
+      } catch (error) {
+        console.error('Error al obtener el usuario:', error.message);
+        throw new Error('No se pudo obtener la información del usuario');
+      }  
     } else {
       const data = request.all();
       if ('page' in data && 'per_page' in data) {

@@ -2,11 +2,28 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import PersonaNatural from 'App/Models/PersonaNatural';
 import PersonaNaturalValidator from 'App/Validators/PersonaNaturalValidator';
+import axios from 'axios';
+import Env from '@ioc:Adonis/Core/Env';
 
 export default class PersonasNaturalesController {
   public async find({ request, params }: HttpContextContract) {
     if (params.id) {
-      return await PersonaNatural.findOrFail(params.id);
+      const persona_natural= await PersonaNatural.findOrFail(params.id);
+      try {
+        const usuarioResponse = await axios.get(
+          `${Env.get('MS_SECURITY')}/api/users/${persona_natural.usuario_id}`
+        );
+  
+        persona_natural.$extras.usuario = usuarioResponse.data;
+
+        return {
+          persona_natural,
+          usuario: usuarioResponse.data,
+        };
+      } catch (error) {
+        console.error('Error al obtener el usuario:', error.message);
+        throw new Error('No se pudo obtener la información del usuario');
+      }
     } else {
       const data = request.all();
       if ('page' in data && 'per_page' in data) {
