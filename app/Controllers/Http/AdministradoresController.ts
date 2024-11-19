@@ -41,4 +41,6 @@ export default class AdministradoresController {
     await record.delete();
     response.status(204);
   }
+
+  //V
 }
