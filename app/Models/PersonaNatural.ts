@@ -1,6 +1,5 @@
 import Cliente from './Cliente';
 import { belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
-import Usuario from './Usuario';
 import { hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import Empresa from './Empresa';
 
@@ -24,7 +23,7 @@ export default class PersonaNatural extends BaseModel {
   public cliente_id: number;
 
   @column()
-  public usuario_id: number;
+  public usuario_id: string;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
@@ -36,12 +35,6 @@ export default class PersonaNatural extends BaseModel {
     foreignKey: "persona_natural_id"
   })
   public empresa: HasOne<typeof Empresa>;
-
-
-  @belongsTo(() => Usuario, {
-    foreignKey: "usuario_id"
-  })
-  public usuario: BelongsTo<typeof Usuario>;
 
 
   @belongsTo(() => Cliente, {

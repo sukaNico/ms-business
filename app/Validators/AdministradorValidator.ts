@@ -7,7 +7,7 @@ export default class AdministradorValidator {
 
   public schema = schema.create({
       nivelAcceso: schema.string({ trim: true }),
-      usuario_id: schema.number(),
+      usuario_id: schema.string(),
       servicio_id: schema.number()
   });
 

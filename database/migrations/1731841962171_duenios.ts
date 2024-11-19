@@ -8,7 +8,7 @@ export default class Duenios extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id');
       table.integer('conductor_id').unsigned().references('id').inTable('conductores').nullable()
-      table.integer('usuario_id').unsigned().references('id').inTable('usuarios').onDelete('CASCADE')
+      table.string('usuario_id')
 
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

@@ -4,9 +4,6 @@ import Duenio from './Duenio';
 import VehiculoConductor from './VehiculoConductor';
 import { hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import Turno from './Turno';
-import { belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
-import Usuario from './Usuario';
-
 import { DateTime } from 'luxon';
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm';
 
@@ -18,7 +15,7 @@ export default class Conductor extends BaseModel {
   public id: number;
 
   @column()
-  public usuario_id: number;
+  public usuario_id: string;
 
   @column()
   public vehiculo_id: number;
@@ -34,12 +31,6 @@ export default class Conductor extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime;
-
-  @belongsTo(() => Usuario, {
-    foreignKey: "usuario_id"
-  })
-  public usuario: BelongsTo<typeof Usuario>;
-
 
   @hasMany(() => Turno, {
     foreignKey: "conductor_id"

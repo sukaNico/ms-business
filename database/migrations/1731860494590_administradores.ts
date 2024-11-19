@@ -8,7 +8,7 @@ export default class Administradores extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id');
       table.string('nivelAcceso')
-      table.integer('usuario_id').unsigned().references('id').inTable('usuarios').onDelete('CASCADE')
+      table.string('usuario_id')
       
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

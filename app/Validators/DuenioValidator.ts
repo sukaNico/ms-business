@@ -8,9 +8,7 @@ export default class DuenioValidator {
     conductor_id: schema.number([
       rules.exists({ table: 'conductores', column: 'id' }), // Verifica que el conductor asociado exista
     ]),
-    usuario_id: schema.number([
-      rules.exists({ table: 'usuarios', column: 'id' }), // Verifica que el usuario asociado exista
-    ]),
+    usuario_id: schema.string(),
   });
 
   public messages = {

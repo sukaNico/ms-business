@@ -15,10 +15,7 @@ export default class PersonaNaturalValidator {
     cliente_id: schema.number([
       rules.exists({ table: 'clientes', column: 'id' }),
     ]),
-    usuario_id: schema.number([
-      rules.exists({ table: 'usuarios', column: 'id' }),
-      rules.unique({ table: 'personas_naturales', column: 'usuario_id' }),
-    ]),
+    usuario_id: schema.string(),
   });
 
   public messages = {

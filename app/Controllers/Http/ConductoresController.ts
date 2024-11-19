@@ -1,12 +1,32 @@
-
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Conductor from 'App/Models/Conductor';
 import ConductorValidator from 'App/Validators/ConductorValidator';
+import axios from 'axios';
+import Env from '@ioc:Adonis/Core/Env';
 
 export default class ConductoresController {
   public async find({ request, params }: HttpContextContract) {
     if (params.id) {
-      return await Conductor.findOrFail(params.id);
+      const conductor = await Conductor.findOrFail(params.id);
+  
+      try {
+        // Petición al microservicio para obtener información del usuario
+        const usuarioResponse = await axios.get(
+          `${Env.get('MS_SECURITY')}/api/users/${conductor.usuario_id}`
+        );
+  
+        // Agregar la información del usuario al conductor
+        conductor.$extras.usuario = usuarioResponse.data;
+  
+        // Incluir el conductor y la información del usuario en la respuesta
+        return {
+          conductor,
+          usuario: usuarioResponse.data,
+        };
+      } catch (error) {
+        console.error('Error al obtener el usuario:', error.message);
+        throw new Error('No se pudo obtener la información del usuario');
+      }
     } else {
       const data = request.all();
       if ('page' in data && 'per_page' in data) {
@@ -17,8 +37,8 @@ export default class ConductoresController {
         return await Conductor.query();
       }
     }
-  }
-
+  }  
+  
   public async create({ request }: HttpContextContract) {
     await request.validate(ConductorValidator);
     const body = request.body();

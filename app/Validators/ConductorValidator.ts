@@ -5,9 +5,7 @@ export default class ConductorValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    usuario_id: schema.number([
-      rules.exists({ table: 'usuarios', column: 'id' }), // Verifica que el usuario exista en la base de datos
-    ]),
+    usuario_id: schema.string({}),
     vehiculo_id: schema.number.optional([
       rules.exists({ table: 'vehiculos', column: 'id' }), // Verifica si el vehículo es válido (opcional)
     ]),

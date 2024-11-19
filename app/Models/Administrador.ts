@@ -1,5 +1,4 @@
 import { hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
-import { belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
 import Servicio from './Servicio';
 
 import { DateTime } from 'luxon';
@@ -16,7 +15,7 @@ export default class Administrador extends BaseModel {
   public nivelAcceso: string;
 
   @column()
-  public usuario_id: number;
+  public usuario_id: string;
 
   @column()
   public servicio_id: number;
