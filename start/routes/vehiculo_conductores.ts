@@ -7,5 +7,5 @@
     Route.post("/vehiculo_conductores", "Vehiculo_conductoresController.create");
     Route.put("/vehiculo_conductores/:id", "Vehiculo_conductoresController.update");
     Route.delete("/vehiculo_conductores/:id", "Vehiculo_conductoresController.delete");
-  });
+  }).middleware(["security"]);
   

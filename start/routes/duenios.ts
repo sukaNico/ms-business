@@ -7,5 +7,5 @@
     Route.post("/duenios", "DueniosController.create");
     Route.put("/duenios/:id", "DueniosController.update");
     Route.delete("/duenios/:id", "DueniosController.delete");
-  });
+  }).middleware(["security"]);
   

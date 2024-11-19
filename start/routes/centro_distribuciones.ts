@@ -7,5 +7,5 @@
     Route.post("/centro_distribuciones", "Centro_distribucionesController.create");
     Route.put("/centro_distribuciones/:id", "Centro_distribucionesController.update");
     Route.delete("/centro_distribuciones/:id", "Centro_distribucionesController.delete");
-  });
+  }).middleware(["security"]);
   

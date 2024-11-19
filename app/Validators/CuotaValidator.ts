@@ -21,9 +21,6 @@ export default class CuotaValidator {
     fecha_vencimiento: schema.date({}, [
       rules.afterField('fecha_generacion'), // Asegura que la fecha de vencimiento sea después de la fecha de generación
     ]),
-    factura_id: schema.number.optional([
-      rules.exists({ table: 'facturas', column: 'id' }), // Verifica si la factura existe (opcional)
-    ]),
   });
 
   public messages = {

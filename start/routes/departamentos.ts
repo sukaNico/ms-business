@@ -8,5 +8,5 @@
     Route.post("/departamentosMany", "DepartamentosController.createMany");
     Route.put("/departamentos/:id", "DepartamentosController.update");
     Route.delete("/departamentos/:id", "DepartamentosController.delete");
-  });
+  }).middleware(["security"]);
   

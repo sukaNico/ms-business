@@ -7,5 +7,5 @@
     Route.post("/personasnaturales", "PersonasNaturalesController.create");
     Route.put("/personasnaturales/:id", "PersonasNaturalesController.update");
     Route.delete("/personasnaturales/:id", "PersonasNaturalesController.delete");
-  });
+  }).middleware(["security"]);
   

@@ -7,5 +7,5 @@
     Route.post("/lotes", "LotesController.create");
     Route.put("/lotes/:id", "LotesController.update");
     Route.delete("/lotes/:id", "LotesController.delete");
-  });
+  }).middleware(["security"]);
   

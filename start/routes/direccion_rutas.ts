@@ -7,5 +7,5 @@
     Route.post("/direccion_rutas", "Direccion_rutasController.create");
     Route.put("/direccion_rutas/:id", "Direccion_rutasController.update");
     Route.delete("/direccion_rutas/:id", "Direccion_rutasController.delete");
-  });
+  }).middleware(["security"]);
   

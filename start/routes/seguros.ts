@@ -7,5 +7,5 @@
     Route.post("/seguros", "SegurosController.create");
     Route.put("/seguros/:id", "SegurosController.update");
     Route.delete("/seguros/:id", "SegurosController.delete");
-  });
+  }).middleware(["security"]);
   
