@@ -7,5 +7,5 @@
     Route.post("/clientes", "ClientesController.create");
     Route.put("/clientes/:id", "ClientesController.update");
     Route.delete("/clientes/:id", "ClientesController.delete");
-  }).middleware(["security"]);
+  })//.middleware(["security"]);
   

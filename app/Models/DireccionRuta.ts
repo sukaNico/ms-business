@@ -8,7 +8,7 @@ import Ruta from './Ruta';
 
 export default class DireccionRuta extends BaseModel {
 
-  public static table = "direccionRutas"
+  public static table = "direccion_rutas"
 
   @column({ isPrimary: true })
   public id: number;
@@ -22,8 +22,8 @@ export default class DireccionRuta extends BaseModel {
   @column()
   public lote_id: number;
 
-  @column()
-  public fechaEntrega: DateTime;
+  @column({columnName:"fechaEntrega" })
+  public fecha_entrega: DateTime;
 
   @column()
   public distancia: number;
@@ -31,8 +31,8 @@ export default class DireccionRuta extends BaseModel {
   @column()
   public estado: string;
 
-  @column()
-  public ordenDePaso: number;
+  @column({columnName:"ordenDePaso" })
+  public orden_de_paso: DateTime;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;

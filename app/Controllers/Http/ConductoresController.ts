@@ -3,6 +3,7 @@ import Conductor from 'App/Models/Conductor';
 import ConductorValidator from 'App/Validators/ConductorValidator';
 import axios from 'axios';
 import Env from '@ioc:Adonis/Core/Env';
+import Notificaciones from 'App/Models/notification'
 
 export default class ConductoresController {
   public async find({ request, params }: HttpContextContract) {
@@ -42,8 +43,34 @@ export default class ConductoresController {
   public async create({ request }: HttpContextContract) {
     await request.validate(ConductorValidator);
     const body = request.body();
-    return await Conductor.create(body);
-  }
+    const conductor = await Conductor.create(body);
+
+    try {
+      // Obtener la información del usuario asociado al conductor
+      const usuarioResponse = await axios.get(
+        `${Env.get('MS_SECURITY')}/api/users/${conductor.usuario_id}`
+      );
+
+      const usuario = usuarioResponse.data;
+
+      // Enviar el correo al usuario asociado
+      const asunto = 'Registro exitoso como conductor';
+      const contenido = `Hola ${usuario.name}, bienvenido al sistema como conductor. A continuación, los datos de su registro:
+      - Licencia de Conducción: ${conductor.licencia_conduccion}
+      - Años de Experiencia: ${conductor.anios_experiencia}`;
+
+      if (usuario.email) {
+        await Notificaciones.enviarNotificacion(asunto, usuario.email, contenido);
+      } else {
+        console.warn('No se pudo enviar el correo: el usuario asociado no tiene dirección de correo.');
+      }
+    } catch (error) {
+      console.error('Error al obtener el usuario o enviar el correo:', error.message);
+      
+    }
+
+    return conductor;
+  }
 
   public async update({ params, request }: HttpContextContract) {
     const record = await Conductor.findOrFail(params.id);

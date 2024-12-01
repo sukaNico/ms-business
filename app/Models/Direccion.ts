@@ -17,8 +17,8 @@ export default class Direccion extends BaseModel {
   @column()
   public barrio: string;
 
-  @column()
-  public tipoCalle: string;
+  @column({ columnName: 'tipoCalle' })
+  public tipo_calle: String;
 
   @column()
   public calle: string;

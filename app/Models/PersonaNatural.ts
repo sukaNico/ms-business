@@ -8,7 +8,7 @@ import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm';
 
 export default class PersonaNatural extends BaseModel {
 
-  public static table = "personaNaturales"
+  public static table = "personas_naturales"
 
   @column({ isPrimary: true })
   public id: number;

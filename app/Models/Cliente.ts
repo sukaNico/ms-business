@@ -15,8 +15,8 @@ export default class Cliente extends BaseModel {
   @column({ isPrimary: true })
   public id: number;
 
-  @column()
-  public fechaRegistro: Date;
+  @column({ columnName: 'fechaRegistro' })
+  public fecha_registro: Date;
 
   @column()
   public preferencias: string;

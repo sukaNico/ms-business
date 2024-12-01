@@ -7,5 +7,5 @@
     Route.post("/productos", "ProductosController.create");
     Route.put("/productos/:id", "ProductosController.update");
     Route.delete("/productos/:id", "ProductosController.delete");
-  }).middleware(["security"]);
+  })//.middleware(["security"]);
   
