@@ -32,10 +32,10 @@ export default class DireccionRutasController {
     record.direccion_id = body.direccion_id;
     record.ruta_id = body.ruta_id;
     record.lote_id = body.lote_id;
-    record.fechaEntrega = body.fechaEntrega;
+    record.fecha_entrega = body.fechaEntrega;
     record.distancia = body.distancia;
     record.estado = body.estado;
-    record.ordenDePaso = body.ordenDePaso;
+    record.orden_de_paso= body.ordenDePaso;
 
     return await record.save();
   }
