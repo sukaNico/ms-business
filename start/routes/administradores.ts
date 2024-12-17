@@ -7,5 +7,5 @@
     Route.post("/administradores", "AdministradoresController.create");
     Route.put("/administradores/:id", "AdministradoresController.update");
     Route.delete("/administradores/:id", "AdministradoresController.delete");
-  }).middleware(["security"]);
+  })//.middleware(["security"]);
   

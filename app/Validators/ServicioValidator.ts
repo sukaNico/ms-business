@@ -11,6 +11,9 @@ export default class ServicioValidator {
     descripcion: schema.string({ trim: true }),
     fecha: schema.string([
       rules.regex(/^\d{4}-\d{2}-\d{2}$/),
+    ]),
+    administrador_id: schema.number([
+      rules.exists({ table: 'administradores', column: 'id' })  // Reglas para verificar si el administrador_id existe
     ])
   });
   

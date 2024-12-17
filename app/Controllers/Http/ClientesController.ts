@@ -43,7 +43,6 @@ export default class ClientesController {
     const record = await Cliente.findOrFail(params.id);
     const body = request.body();
     
-    record.fecha_registro = body.fechaRegistro;
     record.preferencias = body.preferencias;
 
     return await record.save();

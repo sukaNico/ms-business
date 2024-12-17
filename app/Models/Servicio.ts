@@ -28,6 +28,9 @@ export default class Servicio extends BaseModel {
   @column()
   public fecha: Date;
 
+  @column()
+  public administrador_id: Date;
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
 

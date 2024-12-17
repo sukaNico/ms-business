@@ -7,5 +7,5 @@
     Route.post("/categoriaproductos", "CategoriaProductosController.create");
     Route.put("/categoriaproductos/:id", "CategoriaProductosController.update");
     Route.delete("/categoriaproductos/:id", "CategoriaProductosController.delete");
-  }).middleware(["security"]);
+  })//.middleware(["security"]);
   

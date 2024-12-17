@@ -6,9 +6,8 @@ export default class AdministradorValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-      nivelAcceso: schema.string({ trim: true }),
-      usuario_id: schema.string(),
-      servicio_id: schema.number()
+      nivel_acceso: schema.string([]),
+      usuario_id: schema.string([])
   });
 
   public messages = {};
