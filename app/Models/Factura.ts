@@ -21,12 +21,6 @@ export default class Factura extends BaseModel {
   @column()
   public estado: string;
 
-  @column()
-  public cuota_id: number;
-
-  @column()
-  public gasto_id: number;
-
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
 

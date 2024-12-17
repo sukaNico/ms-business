@@ -48,7 +48,6 @@ export default class AdministradoresController {
     
     record.nivelAcceso = body.nivelAcceso;
     record.usuario_id = body.usuario_id;
-    record.servicio_id = body.servicio_id;
 
     return await record.save();
   }

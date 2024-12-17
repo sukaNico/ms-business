@@ -11,14 +11,12 @@ export default class Administrador extends BaseModel {
   @column({ isPrimary: true })
   public id: number;
 
-  @column()
+  @column({columnName: "nivelAcceso"})
   public nivelAcceso: string;
 
   @column()
   public usuario_id: string;
 
-  @column()
-  public servicio_id: number;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;

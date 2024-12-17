@@ -40,7 +40,7 @@ export default class Cliente extends BaseModel {
 
 
   @hasOne(() => PersonaNatural, {
-    foreignKey: "persona_natural_id"
+    foreignKey: "cliente_id"
   })
   public personanatural: HasOne<typeof PersonaNatural>;
 
