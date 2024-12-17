@@ -15,7 +15,7 @@ export default class DireccionRutaValidator {
     lote_id: schema.number([
       rules.exists({ table: 'lotes', column: 'id' }), // Validar que el lote exista
     ]),
-    fechaEntrega: schema.string([
+    fecha_entrega: schema.string([
       rules.regex(/^\d{4}-\d{2}-\d{2}$/), // Formato de fecha YYYY-MM-DD
     ]),
     distancia: schema.number([
@@ -24,7 +24,7 @@ export default class DireccionRutaValidator {
     estado: schema.string({ trim: true }, [
       rules.maxLength(50), // Limitar la longitud del estado a 50 caracteres
     ]),
-    ordenDePaso: schema.number([
+    orden_de_paso: schema.number([
       rules.unsigned(), // El orden de paso debe ser un número positivo
     ]),
   });

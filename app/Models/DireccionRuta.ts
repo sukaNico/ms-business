@@ -22,7 +22,7 @@ export default class DireccionRuta extends BaseModel {
   @column()
   public lote_id: number;
 
-  @column({columnName:"fechaEntrega" })
+  @column()
   public fecha_entrega: DateTime;
 
   @column()
@@ -31,7 +31,7 @@ export default class DireccionRuta extends BaseModel {
   @column()
   public estado: string;
 
-  @column({columnName:"ordenDePaso" })
+  @column()
   public orden_de_paso: DateTime;
 
   @column.dateTime({ autoCreate: true })

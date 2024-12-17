@@ -6,9 +6,7 @@ export default class ClienteValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    fechaRegistro: schema.date({ format: 'yyyy-MM-dd' }, [
-      rules.beforeOrEqual('today'), // Fecha no puede ser futura
-    ]),
+
     preferencias: schema.string({ trim: true }, [
       rules.maxLength(100), // Limitar la longitud a 100 caracteres
     ]),

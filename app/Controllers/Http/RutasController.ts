@@ -34,8 +34,6 @@ export default class RutasController {
     record.lugar_inicio = body.lugar_inicio;
     record.lugar_fin = body.lugar_fin;
     record.distancia = body.distancia;
-    record.fecha_inicio = body.fecha_inicio;
-    record.fecha_fin = body.fecha_fin;
 
     return await record.save();
   }

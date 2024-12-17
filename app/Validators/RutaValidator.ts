@@ -19,9 +19,7 @@ export default class RutaValidator {
     ]),
     distancia: schema.number([
       rules.range(1, 10000), // Define un rango lógico para la distancia (1-10,000)
-    ]),
-    fecha_inicio: schema.date(),
-    fecha_fin: schema.date(),
+    ])
   });
 
   public messages = {

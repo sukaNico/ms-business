@@ -12,11 +12,11 @@ export default class ContratoValidator {
       rules.unsigned(), // Asegura que el valor no sea negativo
       rules.range(1, 10000000), // Define un rango razonable para el valor del contrato
     ]),
-    fecha_inico: schema.date({}, [
+    fecha_inicio: schema.date({}, [
       rules.beforeField('fecha_fin'), // Asegura que la fecha de inicio sea antes de la fecha de fin
     ]),
     fecha_fin: schema.date({}, [
-      rules.afterField('fecha_inico'), // Asegura que la fecha de fin sea después de la fecha de inicio
+      rules.afterField('fecha_inicio'), // Asegura que la fecha de fin sea después de la fecha de inicio
     ]),
   });
 

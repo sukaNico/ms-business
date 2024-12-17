@@ -27,12 +27,8 @@ export default class ClientesController {
 
     // Crear el cliente
     const cliente = await Cliente.create(body);
-
     const personaNaturalData = request.input('personanatural'); // Extrae solo los datos de personaNatural
-
-    // Verificar si hay datos para persona natural
     if (personaNaturalData) {
-    
       await cliente.related('personanatural').create(personaNaturalData);
     }
 

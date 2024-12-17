@@ -30,7 +30,7 @@ export default class DireccionesController {
     const body = request.body();
     
     record.barrio = body.barrio;
-    record.tipo_calle = body.tipoCalle;
+    record.tipo_calle = body.tipo_calle;
     record.calle = body.calle;
     record.numero = body.numero;
     record.piso = body.piso;

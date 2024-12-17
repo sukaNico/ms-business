@@ -9,7 +9,7 @@ export default class DireccionValidator {
     barrio: schema.string({ trim: true }, [
       rules.maxLength(100), // Limitar la longitud del barrio a 100 caracteres
     ]),
-    tipoCalle: schema.string({ trim: true }, [
+    tipo_calle: schema.string({ trim: true }, [
       rules.maxLength(50), // Limitar la longitud del tipo de calle a 50 caracteres
     ]),
     calle: schema.string({ trim: true }, [

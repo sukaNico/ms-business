@@ -15,8 +15,8 @@ export default class Lote extends BaseModel {
   @column({ isPrimary: true })
   public id: number;
 
-  @column({columnName: "tipoDeCarga"})
-  public tipo_de_carga: string;
+  @column()
+  public tipo_carga: string;
 
   @column()
   public peso: number;

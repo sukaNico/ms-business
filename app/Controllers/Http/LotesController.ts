@@ -29,7 +29,7 @@ export default class LotesController {
     const record = await Lote.findOrFail(params.id);
     const body = request.body();
     
-    record.tipo_de_carga = body.tipoDeCarga;
+    record.tipo_carga = body.tipoDeCarga;
     record.peso = body.peso;
     record.ruta_id = body.ruta_id;
 

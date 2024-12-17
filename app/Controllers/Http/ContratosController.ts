@@ -31,7 +31,7 @@ export default class ContratosController {
     
     record.cliente_id = body.cliente_id;
     record.valor = body.valor;
-    record.fecha_inico = body.fecha_inico;
+    record.fecha_inicio = body.fecha_inico;
     record.fecha_fin = body.fecha_fin;
 
     return await record.save();

@@ -6,7 +6,7 @@ export default class LoteValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    tipoDeCarga: schema.string({ trim: true }, [
+    tipo_carga: schema.string({ trim: true }, [
       rules.maxLength(50),
     ]),
     peso: schema.number([

@@ -30,12 +30,6 @@ export default class Ruta extends BaseModel {
   @column()
   public distancia: number;
 
-  @column()
-  public fecha_inicio: Date;
-
-  @column()
-  public fecha_fin: Date;
-
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
 

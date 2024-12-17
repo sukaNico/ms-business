@@ -21,7 +21,7 @@ export default class Contrato extends BaseModel {
   public valor: number;
 
   @column()
-  public fecha_inico: Date;
+  public fecha_inicio: Date;
 
   @column()
   public fecha_fin: Date;
