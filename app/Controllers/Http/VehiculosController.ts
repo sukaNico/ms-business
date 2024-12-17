@@ -44,4 +44,22 @@ export default class VehiculosController {
     await record.delete();
     response.status(204);
   }
+
+  public async updateCoordinates({ params, request, response }: HttpContextContract) {
+    const record = await Vehiculo.findOrFail(params.id);
+  
+    // Validar la entrada para que solo acepte longitud y latitud
+    const body = request.only(['latitud', 'longitud']);
+    if (!body.latitud || !body.longitud) {
+      return response.badRequest({ message: 'Latitud y longitud son requeridas' });
+    }
+  
+    // Actualizar solo las coordenadas
+    record.latitud = body.latitud;
+    record.longitud = body.longitud;
+  
+    await record.save();
+    return response.ok({ message: 'Coordenadas actualizadas', vehiculo: record });
+  }
+  
 }
