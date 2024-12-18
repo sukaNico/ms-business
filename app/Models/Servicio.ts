@@ -29,7 +29,7 @@ export default class Servicio extends BaseModel {
   public fecha: Date;
 
   @column()
-  public administrador_id: Date;
+  public administrador_id: number;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;

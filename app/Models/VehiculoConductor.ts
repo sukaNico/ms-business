@@ -6,10 +6,16 @@ import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class VehiculoConductor extends BaseModel {
 
-  public static table = "vehiculoConductores"
+  public static table = "vehiculo_conductores"
 
   @column({ isPrimary: true })
-  public id: number
+  public id: number;
+
+  @column()
+  public vehiculo_id: number;
+
+  @column()
+  public conductor_id: number;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

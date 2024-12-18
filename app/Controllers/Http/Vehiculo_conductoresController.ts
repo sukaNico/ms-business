@@ -1,45 +1,39 @@
-
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
-import Servicio from 'App/Models/Servicio';
-import ServicioValidator from 'App/Validators/ServicioValidator';
+import VehiculoConductor from 'App/Models/VehiculoConductor';
 
-export default class ServiciosController {
+export default class VehiculoConductoresController {
   public async find({ request, params }: HttpContextContract) {
     if (params.id) {
-      return await Servicio.findOrFail(params.id);
+      return await VehiculoConductor.findOrFail(params.id);
     } else {
       const data = request.all();
       if ('page' in data && 'per_page' in data) {
         const page = request.input('page', 1);
         const perPage = request.input('per_page', 20);
-        return await Servicio.query().paginate(page, perPage);
+        return await VehiculoConductor.query().paginate(page, perPage);
       } else {
-        return await Servicio.query();
+        return await VehiculoConductor.query();
       }
     }
   }
 
   public async create({ request }: HttpContextContract) {
-    await request.validate(ServicioValidator);
     const body = request.body();
-    return await Servicio.create(body);
+    return await VehiculoConductor.create(body);
   }
 
   public async update({ params, request }: HttpContextContract) {
-    const record = await Servicio.findOrFail(params.id);
+    const record = await VehiculoConductor.findOrFail(params.id);
     const body = request.body();
-    
-    record.nombre = body.nombre;
-    record.direccion = body.direccion;
-    record.descripcion = body.descripcion;
-    record.fecha = body.fecha;
-    record.administrador_id = body.administrador_id
+
+    record.vehiculo_id = body.vehiculo_id;
+    record.conductor_id = body.conductor_id;
 
     return await record.save();
   }
 
   public async delete({ params, response }: HttpContextContract) {
-    const record = await Servicio.findOrFail(params.id);
+    const record = await VehiculoConductor.findOrFail(params.id);
     await record.delete();
     response.status(204);
   }

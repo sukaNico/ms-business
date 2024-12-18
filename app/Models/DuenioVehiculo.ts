@@ -6,10 +6,17 @@ import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class DuenioVehiculo extends BaseModel {
 
-  public static table = "duenioVehiculos"
-
   @column({ isPrimary: true })
-  public id: number
+  public id: number;
+
+  @column()
+  public vehiculo_id: number;
+
+  @column()
+  public duenio_id: number;
+
+  @column()
+  public fecha_compra: Date;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

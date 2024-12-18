@@ -1,45 +1,40 @@
-
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
-import Servicio from 'App/Models/Servicio';
-import ServicioValidator from 'App/Validators/ServicioValidator';
+import DuenioVehiculo from 'App/Models/DuenioVehiculo';
 
-export default class ServiciosController {
+export default class DuenioVehiculosController {
   public async find({ request, params }: HttpContextContract) {
     if (params.id) {
-      return await Servicio.findOrFail(params.id);
+      return await DuenioVehiculo.findOrFail(params.id);
     } else {
       const data = request.all();
       if ('page' in data && 'per_page' in data) {
         const page = request.input('page', 1);
         const perPage = request.input('per_page', 20);
-        return await Servicio.query().paginate(page, perPage);
+        return await DuenioVehiculo.query().paginate(page, perPage);
       } else {
-        return await Servicio.query();
+        return await DuenioVehiculo.query();
       }
     }
   }
 
   public async create({ request }: HttpContextContract) {
-    await request.validate(ServicioValidator);
     const body = request.body();
-    return await Servicio.create(body);
+    return await DuenioVehiculo.create(body);
   }
 
   public async update({ params, request }: HttpContextContract) {
-    const record = await Servicio.findOrFail(params.id);
+    const record = await DuenioVehiculo.findOrFail(params.id);
     const body = request.body();
-    
-    record.nombre = body.nombre;
-    record.direccion = body.direccion;
-    record.descripcion = body.descripcion;
-    record.fecha = body.fecha;
-    record.administrador_id = body.administrador_id
+
+    record.vehiculo_id = body.vehiculo_id;
+    record.duenio_id = body.duenio_id;
+    record.fecha_compra = body.fecha_compra;
 
     return await record.save();
   }
 
   public async delete({ params, response }: HttpContextContract) {
-    const record = await Servicio.findOrFail(params.id);
+    const record = await DuenioVehiculo.findOrFail(params.id);
     await record.delete();
     response.status(204);
   }

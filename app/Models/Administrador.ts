@@ -11,21 +11,12 @@ export default class Administrador extends BaseModel {
   @column({ isPrimary: true })
   public id: number;
 
-<<<<<<< Updated upstream
-  @column({columnName: "nivelAcceso"})
-  public nivelAcceso: string;
-=======
   @column()
   public nivel_acceso: string;
->>>>>>> Stashed changes
 
   @column()
   public usuario_id: string;
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
 
