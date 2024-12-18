@@ -9,6 +9,13 @@ export default class ProductosController {
       return await Producto.findOrFail(params.id);
     } else {
       const data = request.all();
+      if("lote_id" in data){
+        return await Producto.query().where("lote_id", request.input("lote_id"))
+    }
+    if("cliente_id" in data){
+      return await Producto.query().where("cliente_id", request.input("cliente_id"))
+    }
+    
       if ('page' in data && 'per_page' in data) {
         const page = request.input('page', 1);
         const perPage = request.input('per_page', 20);

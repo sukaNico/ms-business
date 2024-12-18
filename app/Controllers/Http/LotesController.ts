@@ -9,6 +9,8 @@ export default class LotesController {
       return await Lote.findOrFail(params.id);
     } else {
       const data = request.all();
+      if("ruta_id" in data){
+          return await Lote.query().where("ruta_id", request.input("ruta_id"))}
       if ('page' in data && 'per_page' in data) {
         const page = request.input('page', 1);
         const perPage = request.input('per_page', 20);
