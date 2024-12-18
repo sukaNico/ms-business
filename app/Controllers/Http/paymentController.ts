@@ -2,8 +2,8 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Cuota from 'App/Models/Cuota'
 import Factura from 'App/Models/Factura'
 import ePayco from 'epayco-sdk-node'
-import { DateTime } from 'luxon'
 import Env from '@ioc:Adonis/Core/Env'
+import Gasto from 'App/Models/Gasto'
 
 // Configuración de ePayco
 const apiKey = Env.get('EPAYCO_PUBLIC_KEY')
@@ -38,8 +38,6 @@ export default class PaymentController {
   // Función para crear un cliente
   private async createCustomer(tokenCard: string, customerInfo: any) {
     try {
-
-      
       const customer = await epayco.customers.create({
         name: customerInfo.name,
         last_name: customerInfo.last_name,
@@ -57,11 +55,10 @@ export default class PaymentController {
   // Función para procesar el pago
   private async processPayment(paymentInfo: any, customerId: string, tokenCard: string) {
     try {
-
       const response = await epayco.charge.create({
         token_card: tokenCard,
         customer_id: customerId,
-        doc_type: "CC",
+        doc_type: "CC",           // Tipo de documento (CC = Cédula de Ciudadanía)
         doc_number: paymentInfo.doc_number,
         name: paymentInfo.name,
         last_name: paymentInfo.last_name,
@@ -73,11 +70,10 @@ export default class PaymentController {
         bill: paymentInfo.bill,
         description: "Pago de servicios",
         value: paymentInfo.value,
-        tax: "0",
+        tax: "0",                 // Impuesto, si aplica
         tax_base: paymentInfo.value,
-        currency: "COP",
+        currency: "COP",          // Moneda (COP - Peso colombiano)
       })
-
       return response
     } catch (error) {
       return { error: error.message }
@@ -137,72 +133,184 @@ export default class PaymentController {
       return response.status(500).json(paymentResponse)
     }
 
-    console.log(paymentResponse.data);
-    
-    const paymentData = paymentResponse.data;
-  const parsedDate = DateTime.fromFormat(paymentData.fecha, 'yyyy-MM-dd HH:mm:ss', { zone: 'utc' })
 
-  // Verifica si la conversión fue exitosa
-  if (!parsedDate.isValid) {
-    throw new Error('La fecha es inválida');
-  }
-  
+    return response.status(200).json(paymentResponse.data)
   }
 
+  // Método para pagar la cuota
   public async payCuota({ params, request, response }: HttpContextContract) {
-    const idCuota = params.id_cuota
-
+    const idCuota = params.id_cuota;
+  
     // Validar que la cuota existe
-    const cuota = await Cuota.find(idCuota)
+    const cuota = await Cuota.find(idCuota);
     if (!cuota) {
-      return response.status(404).json({ error: 'Cuota no encontrada' })
+      return response.status(404).json({ error: 'Cuota no encontrada' });
     }
-
+  
     // Recibir datos del pago
-    const paymentData = request.only(['card_number', 'exp_year', 'exp_month', 'cvc', 'value'])
-
+    const paymentData = request.only([
+      'card_number',
+      'exp_year',
+      'exp_month',
+      'cvc',
+      'name',
+      'last_name',
+      'email',
+      'phone',
+      'doc_number',
+      'city',
+      'address',
+      'cell_phone',
+      'bill',
+      'value',
+    ]);
+  
     // Crear un token para la tarjeta
-    const tokenResponse = await this.createToken(paymentData)
+    const tokenResponse = await this.createToken(paymentData);
     if ('error' in tokenResponse) {
-      return response.status(500).json(tokenResponse)
+      return response.status(500).json(tokenResponse);
     }
-
-    const tokenCard = tokenResponse.id
-
-    // Crear un cliente ficticio (o usar datos reales según tu lógica)
+  
+    const tokenCard = tokenResponse.id;
+  
+    // Crear un cliente ficticio (o usar datos reales)
     const customerResponse = await this.createCustomer(tokenCard, {
-      name: 'Cliente',
+      name: 'Cliente Generico',
       last_name: 'Generico',
       email: 'cliente@example.com',
       phone: '1234567890',
-    })
+    });
     if ('error' in customerResponse) {
-      return response.status(500).json(customerResponse)
+      return response.status(500).json(customerResponse);
     }
-
-    const customerId = customerResponse.data?.customerId
-
+  
+    const customerId = customerResponse.data?.customerId;
+  
     // Procesar el pago
-    const paymentResponse = await this.processPayment(paymentData, customerId, tokenCard)
+    const paymentResponse = await this.processPayment(paymentData, customerId, tokenCard);
     if ('error' in paymentResponse) {
-      return response.status(500).json(paymentResponse)
+      return response.status(500).json(paymentResponse);
     }
-    // Crear una factura
-    const factura = new Factura()
-    factura.total = cuota.monto
-    factura.fecha = new Date(DateTime.now().toISODate());
-    factura.estado = "pagado"
-    await factura.save()
+  
 
+    console.log(paymentResponse);
+    console.log(paymentResponse.data.estado);
+    
+    // Verificar el estado del pago
+    if (paymentResponse.data.estado !== 'Aceptada') {
+      return response.status(400).json({
+        message: `Pago rechazado: ${paymentResponse.data.respuesta}`,
+        paymentData: paymentResponse.data,
+      });
+    }
+  
+    console.log("cuota pago:", paymentResponse);
+  
+    // Crear una factura solo si el pago fue exitoso
+    const factura = new Factura();
+    factura.total = cuota.monto;
+    factura.estado = "pagado";
+    factura.fecha = new Date();
+    await factura.save();
+  
     // Asociar la factura con la cuota
-    cuota.factura_id = factura.id
-    await cuota.save()
-
+    cuota.factura_id = factura.id;
+    await cuota.save();
+  
     return response.status(201).json({
       message: 'Pago realizado y factura creada con éxito',
       factura,
       cuota,
-    })
+    });
   }
+  
+
+  public async payGasto({ params, request, response }: HttpContextContract) {
+    const idGasto = params.id_gasto;
+
+    // Validar que el gasto existe
+    const gasto = await Gasto.find(idGasto);
+    if (!gasto) {
+        return response.status(404).json({ error: 'Gasto no encontrado' });
+    }
+
+    console.log(request)
+
+
+    // Recibir datos del pago
+    const paymentData = request.only([
+        'card_number',
+        'exp_year',
+        'exp_month',
+        'cvc',
+        'name',
+        'last_name',
+        'email',
+        'phone',
+        'doc_number',
+        'city',
+        'address',
+        'cell_phone',
+        'bill',
+        'value',
+    ]);
+
+    // Crear un token para la tarjeta
+    const tokenResponse = await this.createToken(paymentData);
+    if ('error' in tokenResponse) {
+        return response.status(500).json(tokenResponse);
+    }
+
+    const tokenCard = tokenResponse.id;
+
+    // Crear un cliente ficticio (o usar datos reales)
+    const customerResponse = await this.createCustomer(tokenCard, {
+        name: 'Cliente Generico',
+        last_name: 'Generico',
+        email: 'cliente@example.com',
+        phone: '1234567890',
+    });
+    if ('error' in customerResponse) {
+        return response.status(500).json(customerResponse);
+    }
+
+    const customerId = customerResponse.data?.customerId;
+
+    // Procesar el pago
+    const paymentResponse = await this.processPayment(paymentData, customerId, tokenCard);
+    if ('error' in paymentResponse) {
+        return response.status(500).json(paymentResponse);
+    }
+
+    console.log(paymentResponse);
+    console.log(paymentResponse.data.estado);
+
+    // Verificar el estado del pago
+    if (paymentResponse.data.estado !== 'Aceptada') {
+        return response.status(400).json({
+            message: `Pago rechazado: ${paymentResponse.data.respuesta}`,
+            paymentData: paymentResponse.data,
+        });
+    }
+
+    console.log("gasto pago:", paymentResponse);
+
+    // Crear una factura solo si el pago fue exitoso
+    const factura = new Factura();
+    factura.total = gasto.costo;
+    factura.estado = "pagado";
+    factura.fecha = new Date();
+    await factura.save();
+
+    // Asociar la factura con el gasto
+    gasto.factura_id = factura.id;
+    await gasto.save();
+
+    return response.status(201).json({
+        message: 'Pago realizado y factura creada con éxito',
+        factura,
+        gasto,
+    });
+}
 
 }
