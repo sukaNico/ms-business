@@ -209,7 +209,7 @@ export default class PaymentController {
     // Crear una factura solo si el pago fue exitoso
     const factura = new Factura();
     factura.total = cuota.monto;
-    factura.estado = "pagado";
+    factura.estado = "aceptado";
     factura.fecha = new Date();
     await factura.save();
   
@@ -298,7 +298,7 @@ export default class PaymentController {
     // Crear una factura solo si el pago fue exitoso
     const factura = new Factura();
     factura.total = gasto.costo;
-    factura.estado = "pagado";
+    factura.estado = "aceptado";
     factura.fecha = new Date();
     await factura.save();
 
