@@ -9,6 +9,8 @@ export default class ContratosController {
       return await Contrato.findOrFail(params.id);
     } else {
       const data = request.all();
+      if("cliente_id" in data){
+              return await Contrato.query().where("cliente_id", request.input("cliente_id"))}
       if ('page' in data && 'per_page' in data) {
         const page = request.input('page', 1);
         const perPage = request.input('per_page', 20);

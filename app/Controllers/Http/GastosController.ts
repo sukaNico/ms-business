@@ -9,6 +9,8 @@ export default class GastosController {
       return await Gasto.findOrFail(params.id);
     } else {
       const data = request.all();
+      if("duenios_id" in data){
+          return await Gasto.query().where("duenios_id", request.input("duenios_id"))} 
       if ('page' in data && 'per_page' in data) {
         const page = request.input('page', 1);
         const perPage = request.input('per_page', 20);

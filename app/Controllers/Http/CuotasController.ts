@@ -9,6 +9,8 @@ export default class CuotasController {
       return await Cuota.findOrFail(params.id);
     } else {
       const data = request.all();
+      if("contrato_id" in data){
+        return await Cuota.query().where("contrato_id", request.input("contrato_id"))}
       if ('page' in data && 'per_page' in data) {
         const page = request.input('page', 1);
         const perPage = request.input('per_page', 20);
