@@ -16,7 +16,7 @@ export default class GastoValidator {
     duenios_id: schema.number([
       rules.exists({ table: 'duenios', column: 'id' })
     ]),
-    factura_id: schema.number([
+    factura_id: schema.number.optional([  // Usamos .optional() para que sea un campo que puede ser nulo o no proporcionado
       rules.exists({ table: 'facturas', column: 'id' })
     ])
   });

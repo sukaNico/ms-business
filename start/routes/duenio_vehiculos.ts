@@ -7,5 +7,5 @@
     Route.post("/duenio_vehiculos", "Duenio_vehiculosController.create");
     Route.put("/duenio_vehiculos/:id", "Duenio_vehiculosController.update");
     Route.delete("/duenio_vehiculos/:id", "Duenio_vehiculosController.delete");
-  }).middleware(["security"]);
+  })//.middleware(["security"]);
   
